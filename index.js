@@ -121,8 +121,8 @@ class Booking {
     this.discount = discount;
     this.room = room;
   }
-  getFee(room) {
-    const roomDiscountPrice = room.rate - room.rate*room.discount/100;
+  getFee() {
+    const roomDiscountPrice = this.room.rate - this.room.rate*this.room.discount/100;
     const finalPrice = roomDiscountPrice - roomDiscountPrice*this.discount/100;
     return finalPrice;
   }
