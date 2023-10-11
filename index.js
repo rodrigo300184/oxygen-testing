@@ -94,20 +94,30 @@ class Room {
   }
 
   static availableRooms(rooms, startingDate, endingDate) {
-    
     if (!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room)) 
     || (typeof startingDate)!=='string' || (typeof endingDate)!=='string'){
       return []; 
     }
-
     let availableRooms = [];
+    
+    for(const room of rooms){
+      let available = true;
+      const startDate = new Date(startingDate);
+      const endDate = new Date(endingDate);
+      startDate.setHours(0, 0, 0, 0);
+      endDate.setHours(23, 59, 59, 999);
+      
+      for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
 
-      for(const room of rooms){
-
-          if(!room.isOccupied(startingDate) && !room.isOccupied(endingDate)){
-            availableRooms.push(room);
-          }
+          if(room.isOccupied(currentDate)){
+            available = false;
+           break;
+           }
         }
+        if(available){
+          availableRooms.push(room);
+        }
+      }
     return availableRooms;
   }
 }
