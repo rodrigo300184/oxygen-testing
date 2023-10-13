@@ -113,7 +113,7 @@ describe('Test for Room class', () => {
         const isOccupied = room1.isOccupied("2023-10-15");
         expect(isOccupied).toBe(false);
       });
-      test("occupancyPercentage entrega un resultado esperado para ciertos bookings ", () => {
+      test("occupancyPercentage entrega un resultado esperado de 100 para ciertos bookings ", () => {
         const room_A = {
           name: "Room1",
           rate: 150,
@@ -137,15 +137,69 @@ describe('Test for Room class', () => {
         );
         const bookings = [booking1, booking2];
         const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
-        const occupancyPercentage1 = room1.occupancyPercentage('2023-10-01','2023-10-06');
-        const occupancyPercentage2 = room1.occupancyPercentage('2023-10-06', '2023-10-01');
-        const occupancyPercentage3 = room1.occupancyPercentage('2023-10-07','2023-10-20');
+        const occupancyPercentage1 = room1.occupancyPercentage('2023-10-01','2023-10-06')
         expect(occupancyPercentage1).toBe(100);
+      
+      });
+
+      test("occupancyPercentage entrega un resultado esperado de 0 para ciertos bookings ", () => {
+        const room_A = {
+          name: "Room1",
+          rate: 150,
+          discount: 10,
+        };
+        const booking1 = new Booking(
+          "booking 1",
+          "bok@bok.es",
+          "2023-10-01",
+          "2023-10-06",
+          10,
+          room_A
+        );
+        const booking2 = new Booking(
+          "booking 2",
+          "bok2@bok.es",
+          "2023-10-07",
+          "2023-10-15",
+          10,
+          room_A
+        );
+        const bookings = [booking1, booking2];
+        const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
+        const occupancyPercentage2 = room1.occupancyPercentage('2023-10-06', '2023-10-01');
         expect(occupancyPercentage2).toBe(0);
+       
+      });
+
+      test("occupancyPercentage entrega un resultado esperado de 64.3 para ciertos bookings ", () => {
+        const room_A = {
+          name: "Room1",
+          rate: 150,
+          discount: 10,
+        };
+        const booking1 = new Booking(
+          "booking 1",
+          "bok@bok.es",
+          "2023-10-01",
+          "2023-10-06",
+          10,
+          room_A
+        );
+        const booking2 = new Booking(
+          "booking 2",
+          "bok2@bok.es",
+          "2023-10-07",
+          "2023-10-15",
+          10,
+          room_A
+        );
+        const bookings = [booking1, booking2];
+        const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
+        const occupancyPercentage3 = room1.occupancyPercentage('2023-10-07','2023-10-20');
         expect(occupancyPercentage3).toBe(64.3);
       
       });
-      test("totalOccupancyPercentage debe entregar el porcentage total de ocupación esperado", () => {
+      test("totalOccupancyPercentage debe entregar el porcentage total de ocupación esperado de 75", () => {
         const room_A = {
           name: "Room1",
           rate: 150,
