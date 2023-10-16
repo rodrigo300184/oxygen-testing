@@ -1,198 +1,124 @@
 class Room {
   constructor(name, bookings, rate, discount) {
-    this.name = name;
-    this.bookings = bookings;
-    this.rate = rate;
-    this.discount = discount;
+      this.name = name;
+      this.bookings = bookings;
+      this.rate = rate;
+      this.discount = discount;
   }
-
   isOccupied(date) {
-    const myDate = new Date(date);
-
-    for (let i = 0; i < this.bookings.length; i++) {
-      const startDate = new Date(this.bookings[i].checkin);
-      const endDate = new Date(this.bookings[i].checkout);
-
-      if (myDate >= startDate && myDate <= endDate) {
-        return true;
+      const myDate = new Date(date);
+      for (let i = 0; i < this.bookings.length; i++) {
+          const startDate = new Date(this.bookings[i].checkin);
+          const endDate = new Date(this.bookings[i].checkout);
+          if (myDate >= startDate && myDate <= endDate) {
+              return true;
+          }
       }
-    }
-
-    return false;
+      return false;
   }
-
   occupancyPercentage(startingDate, endingDate) {
-    const startDate = new Date(startingDate);
-    const endDate = new Date(endingDate);
-
-    startDate.setHours(0, 0, 0, 0);
-    endDate.setHours(23, 59, 59, 999);
-
-    let totalDaysInRange = 0;
-    let occupiedDays = 0;
-
-    for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
-      totalDaysInRange++;
-
-      let isOccupied = false;
-
-      for (const booking of this.bookings) {
-        const bookingStartDate = new Date(booking.checkin);
-        const bookingEndDate = new Date(booking.checkout);
-        bookingStartDate.setHours(0, 0, 0, 0);
-        bookingEndDate.setHours(23, 59, 59, 999);
-
-        if (currentDate >= bookingStartDate && currentDate <= bookingEndDate) {
-          isOccupied = true;
-          break;
-        }
+      const startDate = new Date(startingDate);
+      const endDate = new Date(endingDate);
+      startDate.setHours(0, 0, 0, 0);
+      endDate.setHours(23, 59, 59, 999);
+      let totalDaysInRange = 0;
+      let occupiedDays = 0;
+      for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+          totalDaysInRange++;
+          let isOccupied = false;
+          for (const booking of this.bookings) {
+              const bookingStartDate = new Date(booking.checkin);
+              const bookingEndDate = new Date(booking.checkout);
+              bookingStartDate.setHours(0, 0, 0, 0);
+              bookingEndDate.setHours(23, 59, 59, 999);
+              if (currentDate >= bookingStartDate && currentDate <= bookingEndDate) {
+                  isOccupied = true;
+                  break;
+              }
+          }
+          if (isOccupied) {
+              occupiedDays++;
+          }
       }
-
-      if (isOccupied) {
-        occupiedDays++;
+      if (totalDaysInRange === 0) {
+          return 0;
       }
-    }
-
-    if (totalDaysInRange === 0) {
-      return 0;
-    }
-
-    const percentage = (occupiedDays / totalDaysInRange) * 100;
-
-    return parseFloat(percentage.toFixed(1));
+      const percentage = (occupiedDays / totalDaysInRange) * 100;
+      return parseFloat(percentage.toFixed(1));
   }
-
   static totalOccupancyPercentage(rooms, startDate, endDate) {
-
-    if (!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room))) {
-      return 0;
-    }
-
-    function countDays(startDate, endDate) {
-      const oneDay = 24 * 60 * 60 * 1000;
-      return Math.round(Math.abs((startDate - endDate) / oneDay)) + 1;
-    }
-
-    let totalOccupiedDays = 0;
-    let totalDaysInRange = countDays(new Date(startDate), new Date(endDate));
-
-    if (totalDaysInRange === 0) {
-      return 0;
-    }
-
-    rooms.forEach((room) => {
-      totalOccupiedDays += room.occupancyPercentage(startDate, endDate);
-    });
-
-    const percentage = (totalOccupiedDays / rooms.length).toFixed(1);
-
-    return parseFloat(percentage);
-  }
-
-  static availableRooms(rooms, startingDate, endingDate) {
-    
-    if (!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room)) 
-    || (typeof startingDate)!=='string' || (typeof endingDate)!=='string'){
-      return []; 
-    }
-    const startDate = new Date(startingDate);
-    const endDate = new Date(endingDate);
-
-    startDate.setHours(0, 0, 0, 0);
-    endDate.setHours(23, 59, 59, 999);
-    let availableRooms = [];
-
-      for(const room of rooms){
-        const startDate = new Date(startingDate);
-    const endDate = new Date(endingDate);
-
-    startDate.setHours(0, 0, 0, 0);
-    endDate.setHours(23, 59, 59, 999);
-        let available = true;
-
-        for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
-
-          if(room.isOccupied(currentDate)){
-            available = false;
-           break;
-           }
-        }
-        if(available){
-          availableRooms.push(room);
-        }
+      if (!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room))) {
+          return 0;
       }
-    return availableRooms;
+      function countDays(startDate, endDate) {
+          const oneDay = 24 * 60 * 60 * 1000;
+          return Math.round(Math.abs((startDate.getTime() - endDate.getTime()) / oneDay)) + 1;
+      }
+      let totalOccupiedDays = 0;
+      let totalDaysInRange = countDays(new Date(startDate), new Date(endDate));
+      if (totalDaysInRange === 0) {
+          return 0;
+      }
+      rooms.forEach((room) => {
+          totalOccupiedDays += room.occupancyPercentage(startDate, endDate);
+      });
+      const percentage = (totalOccupiedDays / rooms.length).toFixed(1);
+      return parseFloat(percentage);
+  }
+  static availableRooms(rooms, startingDate, endingDate) {
+      if (!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room))
+          || (typeof startingDate) !== 'string' || (typeof endingDate) !== 'string') {
+          return [];
+      }
+      let availableRooms = [];
+      for (const room of rooms) {
+          let available = true;
+          const startDate = new Date(startingDate);
+          const endDate = new Date(endingDate);
+          startDate.setHours(0, 0, 0, 0);
+          endDate.setHours(23, 59, 59, 999);
+          for (let currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+              if (room.isOccupied(currentDate)) {
+                  available = false;
+                  break;
+              }
+          }
+          if (available) {
+              availableRooms.push(room);
+          }
+      }
+      return availableRooms;
   }
 }
-
 class Booking {
-  constructor(name, email, checkin, checkout, discount, room) {
-    this.name = name;
-    this.email = email;
-    this.checkin = checkin;
-    this.checkout = checkout;
-    this.discount = discount;
-    this.room = room;
+  constructor({ name, email, checkin, checkout, discount, room }) {
+      this.name = name;
+      this.email = email;
+      this.checkin = checkin;
+      this.checkout = checkout;
+      this.discount = discount;
+      this.room = room;
   }
   getFee() {
-    const roomDiscountPrice = this.room.rate - this.room.rate*this.room.discount/100;
-    const finalPrice = roomDiscountPrice - roomDiscountPrice*this.discount/100;
-    return finalPrice;
+      const roomDiscountPrice = this.room.rate - this.room.rate * this.room.discount / 100;
+      const finalPrice = roomDiscountPrice - roomDiscountPrice * this.discount / 100;
+      return finalPrice;
   }
 }
-  
-  const roomA = {
-    name: "roomA",
-    rate: 150,
-    discount: 10,
-  };
 
-  const booking1 = new Booking(
-    "booking 1",
-    "bok@bok.es",
-    "2023-10-01",
-    "2023-10-06",
-    10,
-    roomA
-  );
+const room_A = {
+  name: "Room1",
+  rate: 150,
+  discount: 0,
+};
+const booking1 = new Booking({
+  name: "booking 1",
+  email: "bok@bok.es",
+  checkin: "2023-10-16",
+  checkout: "2023-10-22",
+  rate: 10,
+  room: room_A
+});
 
-  const booking2 = new Booking(
-    "booking 2",
-    "bok2@bok.es",
-    "2023-10-10",
-    "2023-10-15",
-    10,
-    roomA
-  );
-
-  const bookingsA = [booking1, booking2];
-
-  const roomB = {
-    name: "roomB",
-    rate: 150,
-    discount: 10,
-  };
-
-  const booking3 = new Booking(
-    "booking 3",
-    "bok@bok.es",
-    "2023-10-04",
-    "2023-10-19",
-    10,
-    roomB
-  );
-
-  const booking4 = new Booking(
-    "booking 4",
-    "bok2@bok.es",
-    "2023-10-23",
-    "2023-10-25",
-    10,
-    roomB
-  );
-  const bookingsB = [booking3, booking4];
-  const room1 = new Room(roomA.name, bookingsA, roomA.rate, roomA.discount);
-  const room2 = new Room(roomB.name, bookingsB, roomB.rate, roomB.discount);
-  const roomArray = [room1, room2];
-  const availables = Room.availableRooms(roomArray, "2023-10-16", "2023-10-20");
-  console.log(availables)
+const fee = booking1.getFee();
+expect(fee).toEqual(135);

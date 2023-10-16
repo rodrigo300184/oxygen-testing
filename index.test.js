@@ -1,4 +1,4 @@
-const { Room , Booking} = require("./index.js");
+const { Room , Booking} = require("./dist/index.js");
 
 describe('Test for Room class', () => {
     test("isOccupied es true cuando la habitacion esta ocupada en una fecha dada", () => {
@@ -7,22 +7,22 @@ describe('Test for Room class', () => {
           rate: 150,
           discount: 10,
         };
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-16",
-          "2023-10-22",
-          10,
-          room_A
-        );
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-23",
-          "2023-10-31",
-          10,
-          room_A
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email:"bok@bok.es",
+          checkin:"2023-10-16",
+          checkout:"2023-10-22",
+          discount: 10,
+          room: room_A
+        });
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-23",
+          checkout: "2023-10-31",
+          discount: 10,
+          room: room_A
+        });
         const bookings = [booking1, booking2];
         const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
         const isOccupied = room1.isOccupied("2023-10-31");
@@ -34,22 +34,22 @@ describe('Test for Room class', () => {
           rate: 150,
           discount: 10,
         };
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          room_A
-        );
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          room_A
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room:room_A
+        });
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: room_A
+        });
         const bookings = [booking1, booking2];
         const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
         const isOccupied = room1.isOccupied("2023-10-16");
@@ -61,22 +61,22 @@ describe('Test for Room class', () => {
           rate: 150,
           discount: 10,
         };
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          room_A
-        );
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          room_A
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: room_A
+        });
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: room_A
+        });
         const bookings = [booking1, booking2];
         const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
         const isOccupied = room1.isOccupied();
@@ -92,22 +92,22 @@ describe('Test for Room class', () => {
           rate: 150,
           discount: 10,
         };
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-16",
-          "2023-10-22",
-          10,
-          room_A
-        );
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-23",
-          "2023-10-31",
-          10,
-          room_A
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-16",
+          checkout: "2023-10-22",
+          rate: 10,
+          room: room_A
+        });
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-23",
+          checkout: "2023-10-31",
+          rate: 10,
+          room: room_A
+        });
         const bookings = [booking1, booking2];
         const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
         const isOccupied = room1.isOccupied("2023-10-15");
@@ -119,22 +119,22 @@ describe('Test for Room class', () => {
           rate: 150,
           discount: 10,
         };
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          room_A
-        );
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          room_A
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: room_A
+        });
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout:"2023-10-15",
+          rate: 10,
+          room: room_A
+        });
         const bookings = [booking1, booking2];
         const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
         const occupancyPercentage1 = room1.occupancyPercentage('2023-10-01','2023-10-06')
@@ -177,22 +177,22 @@ describe('Test for Room class', () => {
           rate: 150,
           discount: 10,
         };
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          room_A
-        );
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          room_A
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: room_A
+        });
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: room_A
+        });
         const bookings = [booking1, booking2];
         const room1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
         const occupancyPercentage3 = room1.occupancyPercentage('2023-10-07','2023-10-20');
@@ -205,43 +205,43 @@ describe('Test for Room class', () => {
           rate: 150,
           discount: 10,
         };
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          room_A
-        );
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          room_A
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: room_A
+        });
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: room_A
+        });
         const room_B = {
           name: "Room2",
           rate: 150,
           discount: 10,
         };
-        const booking3 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-04",
-          "2023-10-09",
-          10,
-          room_B
-        );
-        const booking4 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-11",
-          "2023-10-15",
-          10,
-          room_B
-        );
+        const booking3 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-04",
+          checkout: "2023-10-09",
+          rate: 10,
+          room: room_B
+        });
+        const booking4 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-11",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: room_B
+        });
         const bookings = [booking1, booking2];
         const bookings2 = [booking3, booking4];
         const room_1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
@@ -256,43 +256,43 @@ describe('Test for Room class', () => {
           rate: 150,
           discount: 10,
         };
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          room_A
-        );
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-31",
-          10,
-          room_A
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: room_A
+        });
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout:"2023-10-31",
+          rate: 10,
+          room: room_A
+        });
         const room_B = {
           name: "Room2",
           rate: 150,
           discount: 10,
         };
-        const booking3 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-10",
-          10,
-          room_B
-        );
-        const booking4 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-11",
-          "2023-10-31",
-          10,
-          room_B
-        );
+        const booking3 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-10",
+          rate: 10,
+          room: room_B
+        });
+        const booking4 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-11",
+          checkout:"2023-10-31",
+          rate: 10,
+          room: room_B
+        });
         const bookings = [booking1, booking2];
         const bookings2 = [booking3, booking4];
         const room_1 = new Room(room_A.name, bookings, room_A.rate, room_A.discount);
@@ -321,23 +321,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          roomA
-        );
+        const booking1 = new Booking({
+         name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: roomA
+        });
     
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          roomA
-        );
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: roomA
+        });
     
         const bookingsA = [booking1, booking2];
     
@@ -347,23 +347,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking3 = new Booking(
-          "booking 3",
-          "bok@bok.es",
-          "2023-10-04",
-          "2023-10-09",
-          10,
-          roomB
-        );
+        const booking3 = new Booking({
+          name: "booking 3",
+          email: "bok@bok.es",
+          checkin: "2023-10-04",
+          checkout: "2023-10-09",
+          rate: 10,
+          room: roomB
+        });
     
-        const booking4 = new Booking(
-          "booking 4",
-          "bok2@bok.es",
-          "2023-10-23",
-          "2023-10-25",
-          10,
-          roomB
-        );
+        const booking4 = new Booking({
+          name: "booking 4",
+          email: "bok2@bok.es",
+          checkin: "2023-10-23",
+          checkout: "2023-10-25",
+          rate: 10,
+          room: roomB
+        });
         const bookingsB = [booking3, booking4];
         const room1 = new Room(roomA.name, bookingsA, roomA.rate, roomA.discount);
         const room2 = new Room(roomB.name, bookingsB, roomB.rate, roomB.discount);
@@ -378,23 +378,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          roomA
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: roomA
+        });
     
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          roomA
-        );
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: roomA
+        });
     
         const bookingsA = [booking1, booking2];
     
@@ -404,23 +404,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking3 = new Booking(
-          "booking 3",
-          "bok@bok.es",
-          "2023-10-04",
-          "2023-10-19",
-          10,
-          roomB
-        );
+        const booking3 = new Booking({
+          name: "booking 3",
+          email: "bok@bok.es",
+          checkin: "2023-10-04",
+          checkout: "2023-10-19",
+          rate: 10,
+          room: roomB
+        });
     
-        const booking4 = new Booking(
-          "booking 4",
-          "bok2@bok.es",
-          "2023-10-23",
-          "2023-10-25",
-          10,
-          roomB
-        );
+        const booking4 = new Booking({
+          name: "booking 4",
+          email: "bok2@bok.es",
+          checkin: "2023-10-23",
+          checkout: "2023-10-25",
+          rate: 10,
+          room: roomB
+        });
         const bookingsB = [booking3, booking4];
         const room1 = new Room(roomA.name, bookingsA, roomA.rate, roomA.discount);
         const room2 = new Room(roomB.name, bookingsB, roomB.rate, roomB.discount);
@@ -435,23 +435,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          roomA
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: roomA
+        });
     
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          roomA
-        );
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: roomA
+        });
     
         const bookingsA = [booking1, booking2];
     
@@ -461,23 +461,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking3 = new Booking(
-          "booking 3",
-          "bok@bok.es",
-          "2023-10-04",
-          "2023-10-19",
-          10,
-          roomB
-        );
+        const booking3 = new Booking({
+          name: "booking 3",
+          email: "bok@bok.es",
+          checkin: "2023-10-04",
+          checkout: "2023-10-19",
+          rate: 10,
+          room: roomB
+        });
     
-        const booking4 = new Booking(
-          "booking 4",
-          "bok2@bok.es",
-          "2023-10-23",
-          "2023-10-25",
-          10,
-          roomB
-        );
+        const booking4 = new Booking({
+          name: "booking 4",
+          email:"bok2@bok.es",
+          checkin: "2023-10-23",
+          checkout: "2023-10-25",
+          rate: 10,
+          room: roomB
+        });
         const bookingsB = [booking3, booking4];
         const room1 = new Room(roomA.name, bookingsA, roomA.rate, roomA.discount);
         const room2 = new Room(roomB.name, bookingsB, roomB.rate, roomB.discount);
@@ -492,23 +492,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          roomA
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: roomA
+        });
     
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          roomA
-        );
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: roomA
+        });
     
         const bookingsA = [booking1, booking2];
     
@@ -518,23 +518,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking3 = new Booking(
-          "booking 3",
-          "bok@bok.es",
-          "2023-10-04",
-          "2023-10-19",
-          10,
-          roomB
-        );
+        const booking3 = new Booking({
+          name: "booking 3",
+          email: "bok@bok.es",
+          checkin: "2023-10-04",
+          checkout: "2023-10-19",
+          rate: 10,
+          room: roomB
+        });
     
-        const booking4 = new Booking(
-          "booking 4",
-          "bok2@bok.es",
-          "2023-10-23",
-          "2023-10-25",
-          10,
-          roomB
-        );
+        const booking4 = new Booking({
+          name: "booking 4",
+          email: "bok2@bok.es",
+          checkin: "2023-10-23",
+          checkout: "2023-10-25",
+          rate: 10,
+          room: roomB
+        });
         const bookingsB = [booking3, booking4];
         const room1 = new Room(roomA.name, bookingsA, roomA.rate, roomA.discount);
         const room2 = new Room(roomB.name, bookingsB, roomB.rate, roomB.discount);
@@ -558,23 +558,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking1 = new Booking(
-          "booking 1",
-          "bok@bok.es",
-          "2023-10-01",
-          "2023-10-06",
-          10,
-          roomA
-        );
+        const booking1 = new Booking({
+          name: "booking 1",
+          email: "bok@bok.es",
+          checkin: "2023-10-01",
+          checkout: "2023-10-06",
+          rate: 10,
+          room: roomA
+        });
     
-        const booking2 = new Booking(
-          "booking 2",
-          "bok2@bok.es",
-          "2023-10-07",
-          "2023-10-15",
-          10,
-          roomA
-        );
+        const booking2 = new Booking({
+          name: "booking 2",
+          email: "bok2@bok.es",
+          checkin: "2023-10-07",
+          checkout: "2023-10-15",
+          rate: 10,
+          room: roomA
+        });
     
         const bookingsA = [booking1, booking2];
     
@@ -584,23 +584,23 @@ describe('Test for Room class', () => {
           discount: 10,
         };
     
-        const booking3 = new Booking(
-          "booking 3",
-          "bok@bok.es",
-          "2023-10-04",
-          "2023-10-19",
-          10,
-          roomB
-        );
+        const booking3 = new Booking({
+          name: "booking 3",
+          email: "bok@bok.es",
+          checkin: "2023-10-04",
+          checkout: "2023-10-19",
+          rate: 10,
+          room: roomB
+        });
     
-        const booking4 = new Booking(
-          "booking 4",
-          "bok2@bok.es",
-          "2023-10-23",
-          "2023-10-25",
-          10,
-          roomB
-        );
+        const booking4 = new Booking({
+          name: "booking 4",
+          email: "bok2@bok.es",
+          checkin: "2023-10-23",
+          checkout: "2023-10-25",
+          rate: 10,
+          room: roomB
+        });
         const bookingsB = [booking3, booking4];
         const room1 = new Room(roomA.name, bookingsA, roomA.rate, roomA.discount);
         const room2 = new Room(roomB.name, bookingsB, roomB.rate, roomB.discount);
@@ -626,16 +626,16 @@ describe('Test for Booking class', () => {
         rate: 150,
         discount: 10,
       };
-      const booking1 = new Booking(
-        "booking 1",
-        "bok@bok.es",
-        "2023-10-16",
-        "2023-10-22",
-        10,
-        room_A
-      );
-
-      const fee = booking1.getFee(room_A);
+      const booking1 = new Booking({
+        name: "booking 1",
+        email: "bok@bok.es",
+        checkin: "2023-10-16",
+        checkout: "2023-10-22",
+        discount: 10,
+        room: room_A
+      });
+      
+      const fee = booking1.getFee();
       expect(fee).toEqual(121.5);
     }); 
     test("getFee debe dar el precio de una habitacion con los descuentos aplicados", () => {
@@ -644,16 +644,16 @@ describe('Test for Booking class', () => {
         rate: 150,
         discount: 0,
       };
-      const booking1 = new Booking(
-        "booking 1",
-        "bok@bok.es",
-        "2023-10-16",
-        "2023-10-22",
-        10,
-        room_A
-      );
+      const booking1 = new Booking({
+        name: "booking 1",
+        email: "bok@bok.es",
+        checkin: "2023-10-16",
+        checkout: "2023-10-22",
+        discount: 10,
+        room: room_A
+      });
 
-      const fee = booking1.getFee(room_A);
+      const fee = booking1.getFee();
       expect(fee).toEqual(135);
     });
     test("getFee debe dar el precio de una habitacion con los descuentos aplicados", () => {
@@ -662,16 +662,16 @@ describe('Test for Booking class', () => {
         rate: 150,
         discount: 10,
       };
-      const booking1 = new Booking(
-        "booking 1",
-        "bok@bok.es",
-        "2023-10-16",
-        "2023-10-22",
-        0,
-        room_A
-      );
+      const booking1 = new Booking({
+        name: "booking 1",
+        email: "bok@bok.es",
+        checkin: "2023-10-16",
+        checkout: "2023-10-22",
+        discount: 0,
+        room: room_A
+      });
 
-      const fee = booking1.getFee(room_A);
+      const fee = booking1.getFee();
       expect(fee).toEqual(135);
     });
     test("getFee debe dar el precio de una habitacion si no tiene descuentos", () => {
@@ -680,16 +680,16 @@ describe('Test for Booking class', () => {
         rate: 150,
         discount: 0,
       };
-      const booking1 = new Booking(
-        "booking 1",
-        "bok@bok.es",
-        "2023-10-16",
-        "2023-10-22",
-        0,
-        room_A
-      );
+      const booking1 = new Booking({
+        name: "booking 1",
+        email: "bok@bok.es",
+        checkin: "2023-10-16",
+        checkout: "2023-10-22",
+        discount: 0,
+        room: room_A
+      });
 
-      const fee = booking1.getFee(room_A);
+      const fee = booking1.getFee();
       expect(fee).toEqual(150);
     });
   });
