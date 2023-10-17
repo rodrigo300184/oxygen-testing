@@ -1,5 +1,5 @@
 
-type RoomParameters = {
+interface RoomParameters  {
   name: string;
   bookings?: Booking[];
   rate: number;
@@ -134,19 +134,13 @@ export class Room implements RoomParameters {
   }
 }
 
-type RoomParams = {
-  name: string,
-  rate: number,
-  discount: number,
-}
-
-type BookingParams = {
+interface BookingParams  {
   name: string,
   email: string,
   checkin: string,
   checkout: string,
   discount: number,
-  room: RoomParams
+  room: RoomParameters
 }
 
 export class Booking implements BookingParams {
@@ -155,7 +149,7 @@ export class Booking implements BookingParams {
   checkin: string;
   checkout: string;
   discount: number;
-  room: RoomParams;
+  room: RoomParameters;
   constructor({ name, email, checkin, checkout, discount, room }: BookingParams) {
     this.name = name;
     this.email = email;
