@@ -1,24 +1,24 @@
 
-interface RoomParameters {
+type RoomParameters = {
   name: string;
-  bookings: Booking[];
+  bookings?: Booking[];
   rate: number;
   discount: number;
 }
 
-class Room implements RoomParameters {
+export class Room implements RoomParameters {
   name: string;
   bookings: Booking[];
   rate: number;
   discount: number;
-  constructor(name: string, bookings: Booking[], rate: number, discount: number  ) {
+  constructor(name: string, bookings: Booking[], rate: number, discount: number) {
     this.name = name;
     this.bookings = bookings;
     this.rate = rate;
     this.discount = discount;
   }
 
-  isOccupied(date: string) {
+  isOccupied(date: string | Date) {
     const myDate = new Date(date);
 
     for (let i = 0; i < this.bookings.length; i++) {
@@ -33,7 +33,7 @@ class Room implements RoomParameters {
     return false;
   }
 
-  occupancyPercentage(startingDate: string, endingDate:string) {
+  occupancyPercentage(startingDate: string, endingDate: string) {
     const startDate = new Date(startingDate);
     const endDate = new Date(endingDate);
 
@@ -78,7 +78,7 @@ class Room implements RoomParameters {
     return parseFloat(percentage.toFixed(1));
   }
 
-  static totalOccupancyPercentage(rooms: Room, startDate:string, endDate: string) {
+  static totalOccupancyPercentage(rooms: Room[], startDate: string, endDate: string) {
 
     if (!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room))) {
       return 0;
@@ -105,7 +105,7 @@ class Room implements RoomParameters {
     return parseFloat(percentage);
   }
 
-  static availableRooms(rooms: Room, startingDate: string, endingDate:string) {
+  static availableRooms(rooms: Room |Room[], startingDate: string, endingDate: string) {
     if (!Array.isArray(rooms) || rooms.every((room) => !(room instanceof Room))
       || (typeof startingDate) !== 'string' || (typeof endingDate) !== 'string') {
       return [];
@@ -134,23 +134,29 @@ class Room implements RoomParameters {
   }
 }
 
-type BookingParams = {
-  name: string, 
-  email: string, 
-  checkin: string, 
-  checkout: string, 
-  discount: number, 
-  room: Room
+type RoomParams = {
+  name: string,
+  rate: number,
+  discount: number,
 }
 
-class Booking implements BookingParams {
+type BookingParams = {
+  name: string,
+  email: string,
+  checkin: string,
+  checkout: string,
+  discount: number,
+  room: RoomParams
+}
+
+export class Booking implements BookingParams {
   name: string;
   email: string;
   checkin: string;
   checkout: string;
   discount: number;
-  room: Room;
-  constructor({name, email, checkin, checkout, discount, room}:BookingParams) {
+  room: RoomParams;
+  constructor({ name, email, checkin, checkout, discount, room }: BookingParams) {
     this.name = name;
     this.email = email;
     this.checkin = checkin;
@@ -165,7 +171,4 @@ class Booking implements BookingParams {
   }
 }
 
-module.exports = {
-  Room,
-  Booking,
-};
+

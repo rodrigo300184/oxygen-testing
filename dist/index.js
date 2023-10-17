@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Booking = exports.Room = void 0;
 class Room {
     constructor(name, bookings, rate, discount) {
         this.name = name;
@@ -91,6 +93,7 @@ class Room {
         return availableRooms;
     }
 }
+exports.Room = Room;
 class Booking {
     constructor({ name, email, checkin, checkout, discount, room }) {
         this.name = name;
@@ -106,8 +109,5 @@ class Booking {
         return finalPrice;
     }
 }
-module.exports = {
-    Room,
-    Booking,
-};
+exports.Booking = Booking;
 //# sourceMappingURL=index.js.map
